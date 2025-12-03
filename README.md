@@ -74,7 +74,7 @@ Prisma Adapter + DB-backed sessions
 
 ## Setup Instructions
 1. Clone repository
-git clone https://github.com/yourusername/calify.git
+git clone https://github.com/Ishagi-Yoichi/calify.git
 cd calify
 
 2. Install dependencies
