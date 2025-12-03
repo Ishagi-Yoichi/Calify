@@ -1,36 +1,59 @@
 "use client"
+
 import Monthly from "@/components/Monthly";
-import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home() {
-  const [date,setDate]= useState(new Date());
-  const [view,setView] = useState('month');
+  const [date, setDate] = useState(new Date());
+  const [view, setView] = useState('month');
 
-  return(
-    <>
-     <div className="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen overflow-auto">
-        <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="text-center mb-12">
-            <h1 className="text-6xl font-bold text-gray-900 mb-4">Calify</h1>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">Your trusted partner for all your event management needs</p>
-            <div className="mt-8">
-              <Link 
-                href="/events"
-                className="inline-block px-8 py-3 bg-blue-600 text-white text-lg font-medium rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+  // NextAuth session
+  const { data: session, status } = useSession();
+
+  return (
+    <div className="bg-gray-100 min-h-screen overflow-auto">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+
+        {/* ------------------ HEADER + AUTH ------------------ */}
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-5xl font-bold text-gray-900">Calify</h1>
+
+          {/* Auth Section */}
+          {status === "loading" ? (
+            <div>Loading...</div>
+          ) : session ? (
+            <div className="flex gap-4 items-center">
+              <span className="text-gray-700">Hello, {session.user?.name || session.user?.email}</span>
+
+              <button
+                onClick={() => signOut()}
+                className="px-3 py-1 bg-red-500 text-white rounded"
               >
-                Manage Events
-              </Link>
+                Sign Out
+              </button>
             </div>
-          </div>
-
-          <div className="flex items-center justify-center">
-            <Monthly/>
-          </div>
-         
+          ) : (
+            <button
+              onClick={() => signIn("google")}
+              className="px-3 py-1 bg-blue-600 text-white rounded"
+            >
+              Sign In with Google
+            </button>
+          )}
         </div>
-     </div>
-    </>
-  )
+
+        {/* ------------------ SUBTITLE ------------------ */}
+        <p className="text-gray-600 text-center text-xl mt-2">
+          Your trusted partner for all your event management needs
+        </p>
+
+        {/* ------------------ CALENDAR ------------------ */}
+        <div className="flex mt-7 items-center justify-center">
+          <Monthly />
+        </div>
+
+      </div>
+    </div>
+  );
 }
