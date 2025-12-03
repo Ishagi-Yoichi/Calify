@@ -16,8 +16,8 @@ type DbEvent = {
   id: number
   title: string
   description?: string | null
-  startDate: string   // ISO from server
-  endDate: string     // ISO from server
+  startDate: string   
+  endDate: string     
   isRecurring?: boolean | null
   frequency?: string | null
   daysOfWeek?: string | null
@@ -39,7 +39,7 @@ function toScheduleXEvent(e: DbEvent) {
     const endDateOnly = toDateOnly(e.endDate)
 
     if (!startDateOnly || !endDateOnly) {
-      // If dates are invalid, throw to be caught below
+      
       throw new Error(`Invalid date for event id=${e.id}`)
     }
 
@@ -107,7 +107,7 @@ function CalendarApp() {
 
 export default function Monthly() {
   return (
-    <div className="h-[590px] w-[1050px]">
+    <div className="w-full max-w-full min-h-[520px] md:min-h-[620px]">
       <CalendarApp />
     </div>
   )
