@@ -5,6 +5,13 @@
 Calify is a sleek, full-stack event scheduling application built with Next.js, Prisma, PostgreSQL, NextAuth, and ScheduleX Calendar.
 Users can authenticate securely, manage their events, and visualize them on an interactive calendar.
 
+## Website Interface
+<img width="1918" height="931" alt="image" src="https://github.com/user-attachments/assets/7dece667-62ab-407a-b149-a8897f958e13" />
+
+<img width="1919" height="931" alt="image" src="https://github.com/user-attachments/assets/56558a1e-23d5-435c-870c-d39ca4a28cc7" />
+
+
+
 ## Tech Stack
 Frontend
 
